@@ -1,0 +1,69 @@
+﻿@model SampleApplication.Models.MessengerViewModel
+@{
+    ViewBag.Title = "Messenger";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Messenger</h2>
+
+<div id="successMessage" class="alert alert-success" style="display: none;">
+    @if (Request.QueryString.AllKeys.Contains("SuccessMessage"))
+    {
+        @Request.QueryString["SuccessMessage"]
+    }
+</div>
+
+<div id="errorMessage" class="alert alert-danger" style="display: none;">
+    @if (Request.QueryString.AllKeys.Contains("ErrorMessage"))
+    {
+        @Request.QueryString["ErrorMessage"]
+    }
+</div>
+
+@using (Html.BeginForm("SendMessage", "Messenger"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <br />
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.To, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Send" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts {
+    <script type="text/javascript">
+        var successMessage = '@Request.QueryString["SuccessMessage"]';
+        var errorMessage = '@Request.QueryString["ErrorMessage"]';
+
+        if (successMessage != '') {
+            $('#successMessage').show();
+        }
+
+        if (errorMessage != '') {
+            $('#errorMessage').show();
+        }
+    </script>
+}
