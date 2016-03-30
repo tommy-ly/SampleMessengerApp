@@ -8,8 +8,10 @@
 <h2>My Contacts</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new {}, new {@class="btn btn-primary"})
+    <span>@Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary" })</span>
+    <span>@Html.ActionLink("Add from file", "Index", "UploadContacts", new { }, new { @class = "btn btn-primary" })</span>
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -58,5 +60,4 @@
         </td>
     </tr>
 }
-
 </table>
