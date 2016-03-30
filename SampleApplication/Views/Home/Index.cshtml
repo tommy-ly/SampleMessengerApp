@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Messenger</h1>
+    <p class="lead">Welcome to simple messenger.</p>
+    
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <p>
+            @Html.ActionLink("Log in", "Login", "Account", new {}, new {@class = "btn btn-primary btn-lg"})
+        </p>
+    }
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Send messages</h2>
+        <p>
+            Simple messenger application. <a class="btn btn-default" href="/Messenger.aspx">Send Message</a>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <h2>Contacts</h2>
+        <p>
+            Manage your contacts. @Html.ActionLink("View Contacts", "List", "Contact", new { }, new { @class = "btn btn-default" })
+        </p>
+    </div>
+</div>

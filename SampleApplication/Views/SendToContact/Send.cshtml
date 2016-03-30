@@ -1,0 +1,27 @@
+﻿@model SampleApplication.Contacts.UserContact
+
+@{
+    ViewBag.Title = "Send";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Send to @Model.ContactName</h2>
+
+@using (Html.BeginForm("Send", "SendToContact", FormMethod.Post))
+{
+    <div class="form-group">
+        <label class="control-label col-md-2" for="body">Message</label>
+        <div class="col-md-10">
+            <textarea class="form-control" name="body"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-10">
+            <input class="form-control btn btn-primary" type="submit" value="Send" />
+        </div>
+    </div>
+}
+
